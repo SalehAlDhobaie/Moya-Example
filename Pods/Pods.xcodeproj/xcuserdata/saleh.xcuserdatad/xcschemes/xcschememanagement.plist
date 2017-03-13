@@ -9,11 +9,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>ModelMapper.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Moya.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,22 +52,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>584AA02621780313D0D256C6CB77BB05</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>77443345DF6FE66EAE160BC87479B068</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>88E9EC28B8B46C3631E6B242B50F4442</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C03303D837A0396E928C90755D08AE74</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FBCC69D7C794145A1D1F84A3164E6083</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -7,22 +7,38 @@
 //
 
 import Foundation
-import Mapper
-// Conform to the Mappable protocol
 
-public struct Post: Mappable {
+public struct Post {
     
-    let userId : Int
-    let id: Int
-    let title : String
-    let body : String
+    var userId : Int?
+    var id: Int?
+    var title : String?
+    var body : String?
     
-    public init(map: Mapper) throws {
-        try userId               = map.from("userId")
-        try id                   = map.from("id")
-        try title                = map.from("title")
-        try body                 = map.from("body")
+}
+
+extension Post {
+    public static func modelObject(item: Dictionary<String, Any>) -> Post? {
+        var post = Post()
+        guard let userId = item["userId"] as? Int, let id = item["id"] as? Int else {
+            return nil
+        }
+        post.userId = userId
+        post.id = id
+        
+        if let title = item["title"] as? String {
+            post.title = title
+        }
+        if let body = item["body"] as? String {
+            post.body = body
+        }
+        return post
     }
     
-    
+    public static func modelObjects(objects: [[String: Any]]) -> [Post?] {
+        
+        return objects.map({item in
+            return Post.modelObject(item: item)
+        })
+    }
 }

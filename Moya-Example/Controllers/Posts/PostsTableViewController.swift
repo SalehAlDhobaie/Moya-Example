@@ -11,7 +11,7 @@ import UIKit
 class PostsTableViewController: UITableViewController {
 
     let activity = UIActivityIndicatorView(activityIndicatorStyle: .gray)
-    var tableViewData : [Post] = []
+    var tableViewData : [Post?] = []
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,8 +47,10 @@ class PostsTableViewController: UITableViewController {
 
         
         // Configure the cell...
-        let item = tableViewData[indexPath.row]
-        cell.textLabel?.text = item.body
+        if let item = tableViewData[indexPath.row] {
+            cell.textLabel?.text = item.body
+        }
+        
         return cell
     }
 
@@ -62,11 +64,10 @@ class PostsTableViewController: UITableViewController {
                 let data = moyaResponse.data
                 
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! NSArray
-                    if let array = Post.from(json) {
-                        self.tableViewData = array
-                        self.tableView.reloadData()
-                    }
+                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! [[String:Any]]
+                    let array : [Post?] = Post.modelObjects(objects: json)
+                    self.tableViewData = array
+                    self.tableView.reloadData()
                 }catch (let error) {
                     print(error.localizedDescription)
                 }
