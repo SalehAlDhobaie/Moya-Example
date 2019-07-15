@@ -13,8 +13,7 @@ import Moya
 // used as global "needs to be enhaced" 
 let appNetworkProvider = MoyaProvider<AppNetwork>()
 
-
-public enum AppNetwork {
+enum AppNetwork {
     // GET /posts
     case posts
     // GET /comments
@@ -25,13 +24,18 @@ public enum AppNetwork {
 
 extension AppNetwork: TargetType {
     
+    public var headers: [String : String]? {
+        return nil
+    }
+    
+    
     // Base Url will be used to hit the api
-    public var baseURL: URL {
+    var baseURL: URL {
         return URL(string: "https://jsonplaceholder.typicode.com")!
     }
     
     // dermine resource path for each end point in 'AppNetwork' enum with Base Url
-    public var path: String {
+    var path: String {
         switch self {
         case .posts:
             return "/posts"
@@ -43,7 +47,7 @@ extension AppNetwork: TargetType {
     }
     
     // detrmine HTTP method "GET, POST, PUT .. etc"
-    public var method: Moya.Method {
+    var method: Moya.Method {
         switch self {
             case .posts:
             return .get
@@ -56,7 +60,7 @@ extension AppNetwork: TargetType {
     
     
     // sending parameters with endpoint in the url e.g /posts/1 or in body "depend on the service"
-    public var parameters: [String: Any]? {
+    var parameters: [String: Any]? {
         switch self {
         case .posts, .comments, .albums:
             return nil
@@ -64,7 +68,7 @@ extension AppNetwork: TargetType {
     }
     
     // specify encodeing for each endpoint or service "JSONEncoding, URLEncoding.. etc"
-    public var parameterEncoding: ParameterEncoding {
+    var parameterEncoding: ParameterEncoding {
         switch self {
         case .posts:
             return JSONEncoding.default
@@ -76,10 +80,10 @@ extension AppNetwork: TargetType {
     }
     
     // specify the type for each task "request, upload, .. etc"
-    public var task: Task {
+    var task: Task {
         switch self {
         case .posts, .comments, .albums:
-            return .request
+            return .requestPlain
         }
     }
     

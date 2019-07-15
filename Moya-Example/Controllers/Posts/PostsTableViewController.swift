@@ -10,7 +10,7 @@ import UIKit
 
 class PostsTableViewController: UITableViewController {
 
-    let activity = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+    let activity = UIActivityIndicatorView(style: .gray)
     var tableViewData : [Post?] = []
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,13 +21,9 @@ class PostsTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         title = "Posts"
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44.0
-
         referchBarButton()
-        
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +51,8 @@ class PostsTableViewController: UITableViewController {
     }
 
     // MARK: - Network Method
-    func fetchPosts() {
+    @objc private func fetchPosts() {
+        
         loadingUI()
         appNetworkProvider.request(.posts) { result in
             

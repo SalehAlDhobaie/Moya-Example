@@ -1,20 +1,30 @@
 PODS:
-  - Alamofire (4.4.0)
-  - Moya (8.0.2):
-    - Moya/Core (= 8.0.2)
-  - Moya/Core (8.0.2):
+  - Alamofire (4.8.2)
+  - Moya/Core (13.0.1):
     - Alamofire (~> 4.1)
-    - Result (~> 3.0)
-  - Result (3.2.1)
+    - Result (~> 4.1)
+  - Moya/RxSwift (13.0.1):
+    - Moya/Core
+    - RxSwift (~> 4.0)
+  - Result (4.1.0)
+  - RxSwift (4.5.0)
 
 DEPENDENCIES:
-  - Moya (~> 8.0)
+  - Moya/RxSwift (~> 13.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - Moya
+    - Result
+    - RxSwift
 
 SPEC CHECKSUMS:
-  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
-  Moya: 47f61da5b634aa71f676431b64ee0f81e976296d
-  Result: 2453a22e5c5b11c0c3a478736e82cd02f763b781
+  Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
+  Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
+  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
+  RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
 
-PODFILE CHECKSUM: f2a32f5984ca7c915294599c96a151d9baad6a80
+PODFILE CHECKSUM: 5fde18c578ffc53e17d9a413e5c09068611f1b65
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.7.3
