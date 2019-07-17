@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import RxSwift
 
 class PostsTableViewController: UITableViewController {
 
+    let disposeBag : DisposeBag = DisposeBag()
+    private var viewModel : PostViewModel = {
+        let repo = PostRepoistoryImp()
+        return PostViewModel(postRepo: repo)
+    }()
+    
     let activity = UIActivityIndicatorView(style: .gray)
     var tableViewData : [Post?] = []
     override func viewDidLoad() {
@@ -24,6 +31,7 @@ class PostsTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44.0
         referchBarButton()
+        bind()
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,62 +43,62 @@ class PostsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return tableViewData.count
+        return viewModel.numberOfItems()
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        
         // Configure the cell...
-        if let item = tableViewData[indexPath.row] {
+        if let item = viewModel.itemAtRow(row: indexPath.row){
             cell.textLabel?.text = item.body
         }
         
         return cell
     }
+    func bind() {
+        viewModel.isLoading.subscribe(onNext: { [unowned self] isLoading in
+            if !isLoading {
+                self.activity.stopAnimating()
+                self.referchBarButton()
+            }else {
+                self.loadingUI()
+            }
+            
+        }).disposed(by: disposeBag)
+        
+        viewModel.posts.subscribe(onNext: { [unowned self] result in
+            self.tableView.reloadData()
+        }).disposed(by: disposeBag)
+    }
 
     // MARK: - Network Method
     @objc private func fetchPosts() {
         
-        loadingUI()
-        appNetworkProvider.request(.posts) { result in
-            
-            switch result {
-            case let .success(moyaResponse):
-                let data = moyaResponse.data
-                
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: []) as! [[String:Any]]
-                    let array : [Post?] = Post.modelObjects(objects: json)
-                    self.tableViewData = array
-                    self.tableView.reloadData()
-                }catch (let error) {
-                    print(error.localizedDescription)
-                }
-                self.activity.stopAnimating()
-                self.referchBarButton()
-            // do something with the response data or statusCode
-            case let .failure(error):
-                print(error.errorDescription ?? "")
-                self.activity.stopAnimating()
-                self.referchBarButton()
-                break
-                // this means there was a network failure - either the request
-                // wasn't sent (connectivity), or no response was received (server
-                // timed out).  If the server responds with a 4xx or 5xx error, that
-                // will be sent as a ".success"-ful response.
-            }
-        }
+        viewModel.fetchPosts(request: "")
+        
+        /*PostRepoistoryImp().fetchPost(request: "").subscribe(onNext: { [unowned self] result in
+            self.activity.stopAnimating()
+            self.referchBarButton()
+            self.tableViewData = result
+            self.tableView.reloadData()
+        }, onError: { error in
+            print(error.localizedDescription)
+            self.activity.stopAnimating()
+            self.referchBarButton()
+            // this means there was a network failure - either the request
+            // wasn't sent (connectivity), or no response was received (server
+            // timed out).  If the server responds with a 4xx or 5xx error, that
+            // will be sent as a ".success"-ful response.
+        }, onCompleted: nil, onDisposed: nil).disposed(by: disposeBag)*/
     }
     
     func referchBarButton() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(fetchPosts))
-
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(fetchPosts))
     }
     func loadingUI() {
         activity.hidesWhenStopped = true
         activity.startAnimating()
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: activity)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: activity)
     }
 }

@@ -8,97 +8,95 @@
 
 import Foundation
 import Moya
+import RxSwift
 
 
-// used as global "needs to be enhaced" 
-let appNetworkProvider = MoyaProvider<AppNetwork>()
-
-enum AppNetwork {
-    // GET /posts
-    case posts
-    // GET /comments
-    case comments
-    // GET /albums
-    case albums
+protocol AppNetworkProvider: class {
+    var rx: Reactive<MoyaProvider<MultiTarget>> { get }
 }
 
-extension AppNetwork: TargetType {
+// MARK: - DefaultAppNetworkProvider
+
+class DefaultAppNetworkProvider {
     
-    public var headers: [String : String]? {
-        return nil
+    var rx: Reactive<MoyaProvider<MultiTarget>> {
+        return moyaProvider.rx
     }
     
+    fileprivate var moyaProvider: MoyaProvider<MultiTarget>!
     
-    // Base Url will be used to hit the api
-    var baseURL: URL {
-        return URL(string: "https://jsonplaceholder.typicode.com")!
+    init() {
+        let plugins = [NetworkLoggerPlugin(verbose: true, responseDataFormatter: JSONResponseDataFormatter)]
+        moyaProvider = MoyaProvider<MultiTarget>(endpointClosure: endpointClosure,
+                                                 requestClosure: requestClosure,
+                                                 stubClosure: stubClosure,
+                                                 plugins: plugins)
     }
-    
-    // dermine resource path for each end point in 'AppNetwork' enum with Base Url
-    var path: String {
-        switch self {
-        case .posts:
-            return "/posts"
-        case .comments:
-            return "/comments"
-        case .albums:
-            return "/albums"
-        }
-    }
-    
-    // detrmine HTTP method "GET, POST, PUT .. etc"
-    var method: Moya.Method {
-        switch self {
-            case .posts:
-            return .get
-            case .comments:
-            return .get
-            case .albums:
-            return .get
-        }
-    }
-    
-    
-    // sending parameters with endpoint in the url e.g /posts/1 or in body "depend on the service"
-    var parameters: [String: Any]? {
-        switch self {
-        case .posts, .comments, .albums:
-            return nil
-        }
-    }
-    
-    // specify encodeing for each endpoint or service "JSONEncoding, URLEncoding.. etc"
-    var parameterEncoding: ParameterEncoding {
-        switch self {
-        case .posts:
-            return JSONEncoding.default
-        case .comments:
-            return JSONEncoding.default
-        case .albums:
-            return JSONEncoding.default
-        }
-    }
-    
-    // specify the type for each task "request, upload, .. etc"
-    var task: Task {
-        switch self {
-        case .posts, .comments, .albums:
-            return .requestPlain
-        }
-    }
-    
-    public var sampleData: Data {
-        // will be discussed in another blog post
-        return Data()
-    }
-    
-    
-    
 }
 
-// suppot urls like /posts?text=hi%20all "%20 .. etc" chars
-extension String {
-    var urlEscaped: String {
-        return self.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+// MARK: AppNetworkProvider Methods
+
+extension DefaultAppNetworkProvider: AppNetworkProvider { }
+
+private extension DefaultAppNetworkProvider {
+    
+    private func endpointClosure(target: MultiTarget) -> Endpoint {
+        let defaultEndpoint = MoyaProvider.defaultEndpointMapping(for: target)
+        
+        /// X-ACCESS-TOKEN
+        switch target.target {
+        // case is VimeoTarget:
+            //return defaultEndpoint
+        default:
+            break
+        }
+        
+        // read token from keychaine .. etc
+        
+        // let cred = CredentialStore.shared
+        /*if let oAuth = cred.authToken(), let idToken = oAuth.idToken {
+            let endpoint = defaultEndpoint.adding(newHTTPHeaderFields: [ "Authorization": "\(idToken)" ])
+            if let accessToken = defaultEndpoint.httpHeaderFields?["x-access-token"] {
+                return endpoint.adding(newHTTPHeaderFields: [
+                    "x-access-token": "\(accessToken)",
+                    ])
+            }
+            return endpoint
+        } else {
+            return defaultEndpoint
+        }*/
+        return defaultEndpoint
+        
     }
+    
+    private func JSONResponseDataFormatter(_ data: Data) -> Data {
+        do {
+            let dataAsJSON = try JSONSerialization.jsonObject(with: data)
+            let prettyData =  try JSONSerialization.data(withJSONObject: dataAsJSON, options: .prettyPrinted)
+            return prettyData
+        } catch {
+            return data // fallback to original data if it can't be serialized.
+        }
+    }
+    
+    func requestClosure(endpoint: Endpoint, done: @escaping MoyaProvider<MultiTarget>.RequestResultClosure) {
+        do {
+            var request = try endpoint.urlRequest()
+            // Modify the request however you like.
+            request.httpShouldHandleCookies = false
+            done(.success(request))
+        } catch {
+            done(.failure(MoyaError.underlying(error, nil)))
+        }
+    }
+    
+    func stubClosure(target: TargetType) -> Moya.StubBehavior {
+        guard let multiTarget = target as? MultiTarget else {
+            return .never
+        }
+        // return .immediate
+        return .never
+    }
+    
+    
 }

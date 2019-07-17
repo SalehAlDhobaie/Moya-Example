@@ -8,7 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		3CA40E2E660C9ECCF0A8F30C /* Pods_Moya_ExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E32DD7F3926CBFFAA2F511D7 /* Pods_Moya_ExampleTests.framework */; };
+		4C41281322DC719B00FA477B /* PostRepoistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41281222DC719B00FA477B /* PostRepoistory.swift */; };
+		4C41281522DC726B00FA477B /* CommentRepoistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41281422DC726B00FA477B /* CommentRepoistory.swift */; };
+		4C41281722DC727600FA477B /* AlbumRepoistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41281622DC727600FA477B /* AlbumRepoistory.swift */; };
+		4C41281B22DC739600FA477B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41281A22DC739600FA477B /* Comment.swift */; };
+		4C41281D22DC8FA600FA477B /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41281C22DC8FA600FA477B /* Album.swift */; };
+		4C41282022DC90B800FA477B /* PostTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41281F22DC90B800FA477B /* PostTarget.swift */; };
+		4C41282222DC913300FA477B /* CommentTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41282122DC913300FA477B /* CommentTarget.swift */; };
+		4C41282422DC919500FA477B /* AlbumTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41282322DC919500FA477B /* AlbumTarget.swift */; };
+		4C41282622DC930D00FA477B /* RepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41282522DC930D00FA477B /* RepositoryProtocol.swift */; };
+		4C41282822DC93B300FA477B /* Rx+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C41282722DC93B300FA477B /* Rx+Extension.swift */; };
 		4C5FCC301E75920B00F1A5A3 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5FCC2F1E75920B00F1A5A3 /* Post.swift */; };
+		4C649D2722DF79B40065F5E7 /* PostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C649D2622DF79B40065F5E7 /* PostViewModel.swift */; };
 		4CA91ACC1E7587580075C218 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA91ACB1E7587580075C218 /* AppDelegate.swift */; };
 		4CA91AD11E7587580075C218 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4CA91ACF1E7587580075C218 /* Main.storyboard */; };
 		4CA91AD31E7587580075C218 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CA91AD21E7587580075C218 /* Assets.xcassets */; };
@@ -41,7 +52,18 @@
 /* Begin PBXFileReference section */
 		1F55CAAA26618E9C3000E714 /* Pods-Moya-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moya-Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Moya-Example/Pods-Moya-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		3FE750C865681D8811138B44 /* Pods-Moya-ExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moya-ExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Moya-ExampleTests/Pods-Moya-ExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4C41281222DC719B00FA477B /* PostRepoistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepoistory.swift; sourceTree = "<group>"; };
+		4C41281422DC726B00FA477B /* CommentRepoistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepoistory.swift; sourceTree = "<group>"; };
+		4C41281622DC727600FA477B /* AlbumRepoistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumRepoistory.swift; sourceTree = "<group>"; };
+		4C41281A22DC739600FA477B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		4C41281C22DC8FA600FA477B /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		4C41281F22DC90B800FA477B /* PostTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTarget.swift; sourceTree = "<group>"; };
+		4C41282122DC913300FA477B /* CommentTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTarget.swift; sourceTree = "<group>"; };
+		4C41282322DC919500FA477B /* AlbumTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumTarget.swift; sourceTree = "<group>"; };
+		4C41282522DC930D00FA477B /* RepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryProtocol.swift; sourceTree = "<group>"; };
+		4C41282722DC93B300FA477B /* Rx+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rx+Extension.swift"; sourceTree = "<group>"; };
 		4C5FCC2F1E75920B00F1A5A3 /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		4C649D2622DF79B40065F5E7 /* PostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewModel.swift; sourceTree = "<group>"; };
 		4CA91AC81E7587580075C218 /* Moya-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Moya-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4CA91ACB1E7587580075C218 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4CA91AD01E7587580075C218 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -93,10 +115,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4C41281122DC718800FA477B /* Repoistory */ = {
+			isa = PBXGroup;
+			children = (
+				4C41281222DC719B00FA477B /* PostRepoistory.swift */,
+				4C41281422DC726B00FA477B /* CommentRepoistory.swift */,
+				4C41281622DC727600FA477B /* AlbumRepoistory.swift */,
+				4C41282522DC930D00FA477B /* RepositoryProtocol.swift */,
+				4C41282722DC93B300FA477B /* Rx+Extension.swift */,
+			);
+			path = Repoistory;
+			sourceTree = "<group>";
+		};
+		4C41281E22DC90A700FA477B /* Targets */ = {
+			isa = PBXGroup;
+			children = (
+				4C41281F22DC90B800FA477B /* PostTarget.swift */,
+				4C41282122DC913300FA477B /* CommentTarget.swift */,
+				4C41282322DC919500FA477B /* AlbumTarget.swift */,
+			);
+			path = Targets;
+			sourceTree = "<group>";
+		};
 		4C5FCC2E1E7591F700F1A5A3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				4C5FCC2F1E75920B00F1A5A3 /* Post.swift */,
+				4C41281A22DC739600FA477B /* Comment.swift */,
+				4C41281C22DC8FA600FA477B /* Album.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -126,6 +172,7 @@
 		4CA91ACA1E7587580075C218 /* Moya-Example */ = {
 			isa = PBXGroup;
 			children = (
+				4C41281122DC718800FA477B /* Repoistory */,
 				4CA91ACB1E7587580075C218 /* AppDelegate.swift */,
 				4C5FCC2E1E7591F700F1A5A3 /* Model */,
 				4CA91AFC1E758BDB0075C218 /* Controllers */,
@@ -159,6 +206,7 @@
 		4CA91AF91E7587A70075C218 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				4C41281E22DC90A700FA477B /* Targets */,
 				4CA91AFA1E7587C30075C218 /* AppNetwork.swift */,
 			);
 			path = Network;
@@ -176,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				4CA91AFD1E758C0D0075C218 /* PostsTableViewController.swift */,
+				4C649D2622DF79B40065F5E7 /* PostViewModel.swift */,
 			);
 			path = Posts;
 			sourceTree = "<group>";
@@ -366,6 +415,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -373,6 +423,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,10 +474,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C649D2722DF79B40065F5E7 /* PostViewModel.swift in Sources */,
+				4C41282422DC919500FA477B /* AlbumTarget.swift in Sources */,
 				4CA91ACC1E7587580075C218 /* AppDelegate.swift in Sources */,
+				4C41281722DC727600FA477B /* AlbumRepoistory.swift in Sources */,
+				4C41282822DC93B300FA477B /* Rx+Extension.swift in Sources */,
 				4CA91AFE1E758C0D0075C218 /* PostsTableViewController.swift in Sources */,
 				4CA91AFB1E7587C30075C218 /* AppNetwork.swift in Sources */,
+				4C41281522DC726B00FA477B /* CommentRepoistory.swift in Sources */,
+				4C41282022DC90B800FA477B /* PostTarget.swift in Sources */,
+				4C41281322DC719B00FA477B /* PostRepoistory.swift in Sources */,
+				4C41282222DC913300FA477B /* CommentTarget.swift in Sources */,
+				4C41281B22DC739600FA477B /* Comment.swift in Sources */,
 				4C5FCC301E75920B00F1A5A3 /* Post.swift in Sources */,
+				4C41281D22DC8FA600FA477B /* Album.swift in Sources */,
+				4C41282622DC930D00FA477B /* RepositoryProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
